@@ -1,5 +1,9 @@
 locals {
-    name_prefix = join("-", [
+   googleapis = [
+   "securitycenter.googleapis.com"
+ ]
+
+  name_prefix = join("-", [
     var.org, 
     var.country,
     #var.env,
@@ -23,6 +27,10 @@ locals {
   cf_prefix  = replace(local.name_prefix, "[SERVICE]", "cf")
   vpc_prefix  = replace(local.name_prefix, "[SERVICE]", "vpc")
   ps_prefix  = replace(local.name_prefix, "[SERVICE]", "ps")
+  scc_prefix  = replace(local.name_prefix, "[SERVICE]", "sc")
+  gke_prefix  = replace(local.name_prefix, "[SERVICE]", "gke")
+  lb_prefix  = replace(local.name_prefix, "[SERVICE]", "lb")
+  ssl_prefix  = replace(local.name_prefix, "[SERVICE]", "ssl")
 }
 
 data "google_project" "project" {
