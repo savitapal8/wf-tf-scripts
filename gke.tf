@@ -24,7 +24,7 @@ resource "google_container_cluster" "primary" {
 }
 
 resource "google_container_node_pool" "primary_preemptible_nodes" {
-  name       = "${local.gke_prefix}-np1234
+  name       = "${local.gke_prefix}-np1234"
   location   = "us-central1"
   cluster    = google_container_cluster.primary.name
   node_count = 1
