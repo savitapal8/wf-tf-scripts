@@ -82,7 +82,7 @@ resource "google_compute_region_url_map" "default" {
 
 # backend service
 resource "google_compute_region_backend_service" "default" {
-  name                  = "${local.lb_prefix}_lbbacka123"
+  name                  = "${local.lb_prefix}-lbbacka123"
   provider              = google-beta
   region                = "europe-west1"
   protocol              = "HTTP"
