@@ -1,7 +1,7 @@
 locals {
     name_prefix = join("-", [
     var.org, 
-    var.country,
+    #var.country,
     var.env,
     "[SERVICE]",     
     var.appid]
