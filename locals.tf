@@ -20,6 +20,9 @@ locals {
   kms_prefix  = replace(local.name_prefix, "[SERVICE]", "kms")
   gcs_prefix  = replace(local.name_prefix, "[SERVICE]", "gcs")
   log_prefix  = replace(local.name_prefix, "[SERVICE]", "log")
+  cf_prefix  = replace(local.name_prefix, "[SERVICE]", "cf")
+  vpc_prefix  = replace(local.name_prefix, "[SERVICE]", "vpc")
+  ps_prefix  = replace(local.name_prefix, "[SERVICE]", "ps")
 }
 
 data "google_project" "project" {
