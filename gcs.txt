@@ -1,5 +1,5 @@
 resource "google_storage_bucket" "bucket" {
-  name     = "${local.gcs_prefix}-dpcluster"
+  name     = "${local.gcs_prefix}-12346"
   location = "us"
 }
 
