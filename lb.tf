@@ -59,7 +59,7 @@ resource "google_compute_region_ssl_certificate" "default" {
 
 # url map
 resource "google_compute_region_url_map" "default" {
-  name            = "my-dev-appid-strg-demolb1-map"
+  name            = "${local.lb_prefix}-url123"
   provider        = google-beta
   region          = "europe-west1"
   default_service = google_compute_region_backend_service.default.id
