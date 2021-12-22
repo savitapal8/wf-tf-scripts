@@ -6,7 +6,7 @@ resource "google_kms_crypto_key_iam_member" "bq_encryption_iam" {
 
 resource "google_bigquery_dataset" "dataset" {
   depends_on   = [google_kms_crypto_key.secret]
-  dataset_id   = "${local.bq_prefix}-bqds"
+  dataset_id   = "${local.bq_prefix}_bqds"
   default_encryption_configuration {
     kms_key_name = google_kms_crypto_key.secret.id
   }
