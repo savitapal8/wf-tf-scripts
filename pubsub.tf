@@ -18,7 +18,7 @@ resource "google_pubsub_topic" "pb_topic" {
     environment = "dev" 
     created = "20211124" 
   }
- kms_key_name = google_kms_crypto_key.secrets.id
+ kms_key_name = google_kms_crypto_key.secret.id
 }
 
 resource "google_pubsub_topic_iam_member" "member" {
