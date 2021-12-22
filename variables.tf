@@ -25,7 +25,7 @@ variable "org" {
 variable "country" {
   description = "country"
   type        = string
-  default     = "eu"
+  default     = "us"
 }
 
 variable "env" {
