@@ -35,7 +35,7 @@ resource "google_compute_forwarding_rule" "google_compute_forwarding_rule" {
   load_balancing_scheme = "INTERNAL_MANAGED"
   port_range            = "443"
   all_ports             = true
-  target                = google_compute_region_target_http_proxy.default.id
+  target                = google_compute_region_target_https_proxy.default.id
   network               = google_compute_network.ilb_network.id
   subnetwork            = google_compute_subnetwork.ilb_subnet.id
   network_tier          = "PREMIUM"
@@ -55,6 +55,29 @@ resource "google_compute_region_ssl_certificate" "default" {
   name        = "${local.ssl_prefix}-ssl123"
   private_key = file("certs/keystore.key")
   certificate = file("certs/certificate.crt")
+}
+
+# url map
+resource "google_compute_region_url_map" "default" {
+  name            = "my-dev-appid-strg-demolb1-map"
+  provider        = google-beta
+  region          = "europe-west1"
+  default_service = google_compute_region_backend_service.default.id
+  
+   host_rule {
+    hosts        = ["test.example.com"]
+    path_matcher = "allpaths"
+  }
+
+  path_matcher {
+    name            = "allpaths"
+    default_service = google_compute_region_backend_service.default.id
+
+    path_rule {
+      paths   = ["/*"]
+      service = google_compute_region_backend_service.default.id
+    }
+ }
 }
 
 # backend service
@@ -129,4 +152,17 @@ resource "google_compute_region_health_check" "default" {
   http_health_check {
     port_specification = "USE_SERVING_PORT"
   }
+}
+
+# MIG
+resource "google_compute_region_instance_group_manager" "mig" {
+  name     = "my-dev-appid-strg-demolb1-mig1"
+  provider = google-beta
+  region   = "europe-west1"
+  version {
+    instance_template = google_compute_instance_template.instance_template.id
+    name              = "primary"
+  }
+  base_instance_name = "vm"
+  target_size        = 2
 }

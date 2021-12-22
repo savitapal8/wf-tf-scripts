@@ -31,6 +31,7 @@ locals {
   gke_prefix  = replace(local.name_prefix, "[SERVICE]", "gke")
   lb_prefix  = replace(local.name_prefix, "[SERVICE]", "lb")
   ssl_prefix  = replace(local.name_prefix, "[SERVICE]", "ssl")
+  fw_prefix = replace(local.name_prefix, "[SERVICE]", "fw")
 }
 
 data "google_project" "project" {
