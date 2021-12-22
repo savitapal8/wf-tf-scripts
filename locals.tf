@@ -1,7 +1,7 @@
 locals {
     name_prefix = join("-", [
     var.org, 
-    #var.country,
+    var.country,
     var.env,
     "[SERVICE]",     
     var.appid]
@@ -10,4 +10,8 @@ locals {
   # Specific prefix for service’s resources
   bq_prefix  = replace(replace(local.name_prefix, "[SERVICE]", "bq"), "-", "_")
   kms_prefix = replace(local.name_prefix, "[SERVICE]", "kms")
+}
+
+data "google_project" "project" {
+    project_id = var.project_id
 }

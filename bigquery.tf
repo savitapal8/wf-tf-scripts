@@ -1,12 +1,3 @@
-resource "google_kms_crypto_key" "secret" {
- name     = "${local.kms_prefix}-key"
- key_ring = var.key_ring
-}
-
-data "google_project" "project" {
-    project_id = var.project_id
-}
-
 resource "google_kms_crypto_key_iam_member" "bq_encryption_iam" {
  crypto_key_id = google_kms_crypto_key.secret.id
  role          = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
