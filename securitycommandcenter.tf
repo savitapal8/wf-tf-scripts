@@ -1,5 +1,5 @@
 resource "google_scc_notification_config" "kms_notification_config_high" {
-  config_id    = "${local.scc_prefix}_scc123"
+  config_id    = "${local.scc_prefix}-scc123"
   organization = var.org
   description  = "Notification when any high-severity findings is identified"
   pubsub_topic =  google_pubsub_topic.pb_topic.id
