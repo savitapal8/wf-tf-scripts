@@ -1,5 +1,5 @@
 resource "google_cloudfunctions_function" "function" {
-  name        = "${local.cf_prefix}-12234"
+  name        = "${local.cf_prefix}_12234"
   description = "My function"
   runtime     = "python39"
 

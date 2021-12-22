@@ -1,13 +1,13 @@
 # VPC
 resource "google_compute_network" "ilb_network" {
-  name                    = "${local.vpc_prefix}-vpc1"
+  name                    = "${local.vpc_prefix}_vpc1"
   provider                = google-beta
   auto_create_subnetworks = false
 }
 
 # proxy-only subnet
 resource "google_compute_subnetwork" "proxy_subnet" {
-  name          = "${local.vpc_prefix}-pxsubnet"
+  name          = "${local.vpc_prefix}_pxsubnet"
   provider      = google-beta
   ip_cidr_range = "10.0.0.0/24"
   region        = "europe-west1"
@@ -18,7 +18,7 @@ resource "google_compute_subnetwork" "proxy_subnet" {
 
 # backed subnet
 resource "google_compute_subnetwork" "ilb_subnet" {
-  name          = "${local.vpc_prefix}-subnet12"
+  name          = "${local.vpc_prefix}_subnet12"
   provider      = google-beta
   ip_cidr_range = "10.0.1.0/24"
   region        = "europe-west1"
@@ -27,7 +27,7 @@ resource "google_compute_subnetwork" "ilb_subnet" {
 
 # forwarding rule
 resource "google_compute_forwarding_rule" "google_compute_forwarding_rule" {
-  name                  = "${local.lb_prefix}-tcpilb"
+  name                  = "${local.lb_prefix}_tcpilb"
   provider              = google-beta
   region                = "europe-west1"
   depends_on            = [google_compute_subnetwork.proxy_subnet]
@@ -44,7 +44,7 @@ resource "google_compute_forwarding_rule" "google_compute_forwarding_rule" {
 # http proxy
 resource "google_compute_region_target_https_proxy" "default" {
   region           = "europe-west1"
-  name             = "${local.lb_prefix}-httpsproxy"
+  name             = "${local.lb_prefix}_httpsproxy"
   url_map          = google_compute_region_url_map.default.id
   ssl_certificates = [google_compute_region_ssl_certificate.default.id]
 }
@@ -52,14 +52,14 @@ resource "google_compute_region_target_https_proxy" "default" {
 # ssl certificate
 resource "google_compute_region_ssl_certificate" "default" {
   region      = "europe-west1"
-  name        = "${local.ssl_prefix}-ssl123"
+  name        = "${local.ssl_prefix}_ssl123"
   private_key = file("certs/keystore.key")
   certificate = file("certs/certificate.crt")
 }
 
 # url map
 resource "google_compute_region_url_map" "default" {
-  name            = "${local.lb_prefix}-url123"
+  name            = "${local.lb_prefix}_url123"
   provider        = google-beta
   region          = "europe-west1"
   default_service = google_compute_region_backend_service.default.id
@@ -82,7 +82,7 @@ resource "google_compute_region_url_map" "default" {
 
 # backend service
 resource "google_compute_region_backend_service" "default" {
-  name                  = "${local.lb_prefix}-lbbackend123"
+  name                  = "${local.lb_prefix}_lbbackend123"
   provider              = google-beta
   region                = "europe-west1"
   protocol              = "HTTP"
@@ -146,7 +146,7 @@ resource "google_compute_instance_template" "instance_template" {
 
 # health check
 resource "google_compute_region_health_check" "default" {
-  name     = "${local.lb_prefix}-lbbackend"
+  name     = "${local.lb_prefix}_lbbackend"
   provider = google-beta
   region   = "europe-west1"
   http_health_check {

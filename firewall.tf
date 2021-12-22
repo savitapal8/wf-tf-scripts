@@ -1,6 +1,6 @@
 # allow all access from IAP and health check ranges
 resource "google_compute_firewall" "fw-iap" {
-  name          = "${local.fw_prefix}-fw1"
+  name          = "${local.fw_prefix}_fw1"
   provider      = google-beta
   direction     = "INGRESS"
   network       = google_compute_network.ilb_network.id
@@ -12,7 +12,7 @@ resource "google_compute_firewall" "fw-iap" {
 
 # allow http from proxy subnet to backends
 resource "google_compute_firewall" "fw-ilb-to-backends" {
-  name          = "${local.fw_prefix}-fw2"
+  name          = "${local.fw_prefix}_fw2"
   provider      = google-beta
   direction     = "INGRESS"
   network       = google_compute_network.ilb_network.id
