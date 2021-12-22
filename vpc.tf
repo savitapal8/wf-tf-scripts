@@ -36,6 +36,7 @@ resource "google_compute_route" "default_internet" {
   name        = "${local.vpc_prefix}-route"
   dest_range  = "0.0.0.0/0"
   network     = google_compute_network.vpc_network_1.name
+  next_hop_ip = "10.0.0.6"
 }
 
 # Create Subnet

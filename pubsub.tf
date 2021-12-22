@@ -1,6 +1,6 @@
 
 resource "google_kms_crypto_key_iam_member" "encryption" {
- crypto_key_id = google_kms_crypto_key.secrets.id
+ crypto_key_id = google_kms_crypto_key.secret.id
  role          = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
  member        = "serviceAccount:service-${data.google_project.project.number}@gcp-sa-pubsub.iam.gserviceaccount.com"
 }

@@ -1,3 +1,9 @@
+resource "google_service_account" "example" {
+ account_id   = "service-account-id1"
+ display_name = "Function Example Service Account"
+ project      = var.project_id
+}
+
 resource "google_cloudfunctions_function" "function" {
   name        = "${local.cf_prefix}-12234"
   description = "My function"
