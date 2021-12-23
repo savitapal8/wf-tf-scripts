@@ -27,7 +27,7 @@ locals {
   cf_prefix  = replace(local.name_prefix, "[SERVICE]", "cf")
   vpc_prefix  = replace(local.name_prefix, "[SERVICE]", "vpc")
   ps_prefix  = replace(local.name_prefix, "[SERVICE]", "ps")
-  scc_prefix  = replace(local.name_prefix, "[SERVICE]", "sc")
+  scc_prefix  = replace(local.name_prefix, "[SERVICE]", "scc")
   gke_prefix  = replace(local.name_prefix, "[SERVICE]", "gke")
   lb_prefix  = replace(local.name_prefix, "[SERVICE]", "lb")
   ssl_prefix  = replace(local.name_prefix, "[SERVICE]", "ssl")
