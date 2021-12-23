@@ -32,7 +32,7 @@ locals {
   lb_prefix  = replace(local.name_prefix, "[SERVICE]", "lb")
   ssl_prefix  = replace(local.name_prefix, "[SERVICE]", "ssl")
   fw_prefix = replace(local.name_prefix, "[SERVICE]", "fw")
-  df_prefix  = replace(local.name_prefix, "[SERVICE]", "d") # "df")
+  df_prefix  = replace(local.name_prefix, "[SERVICE]", "df")
   sm_prefix  = replace(local.name_prefix, "[SERVICE]", "s") # "sm")
 }
 
