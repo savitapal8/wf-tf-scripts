@@ -3,7 +3,6 @@ resource "time_static" "secret_expiration" { }
 resource "google_secret_manager_secret" "secret" {
  project   = var.project_id
  secret_id = "${local.sm_prefix}-secret"
- labels    = local.labels
 
  # Encryption
  customer_managed_encryption {
