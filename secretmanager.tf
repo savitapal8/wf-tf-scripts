@@ -4,10 +4,7 @@ resource "google_secret_manager_secret" "secret" {
  project   = var.project_id
  secret_id = "${local.sm_prefix}-secret"
 
- # Encryption
- customer_managed_encryption {
-   kms_key_name = google_kms_crypto_key.secrets.name
- }
+ 
  # Rotation (90 days) - Notifications each 1 day
  rotation {
    next_rotation_time = timeadd(time_static.secret_expiration.rfc3339, "2160h")
