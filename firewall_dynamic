@@ -1,0 +1,39 @@
+provider "google"{
+
+}
+
+locals {
+  allow = [
+    {
+      protocol = "icmp"
+      ports    = []
+    }, 
+    {
+      protocol = "tcp"
+      ports    = ["80", "8080", "1000-2000"]
+    }
+  ]
+}
+
+resource "google_compute_firewall" "default" {
+  name    = "test-firewall"
+  network = google_compute_network.default1.name
+  project  = "ashwinknaik-314910"
+
+
+  dynamic "allow" {
+    for_each = local.allow
+ 
+    content {
+      protocol  = allow.value.protocol
+      ports     = allow.value.ports
+    }
+  }
+  
+  source_tags = ["web"]
+}
+
+resource "google_compute_network" "default1" {
+  name     = "test-network"
+  project  = "ashwinknaik-314910"
+}
